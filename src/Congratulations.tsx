@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 
 function Congratulations() {
-  // Background images from public/background directory
+  // Background images from public/background directory - use base URL for GitHub Pages
+  const BASE_URL = import.meta.env.BASE_URL;
   const backgroundImages = [
-    "/background/IMG_1175.jpg",
-    "/background/IMG_1176.jpg",
-    "/background/IMG_1177.jpg",
-    "/background/IMG_1178.jpg",
-    "/background/IMG_1179.jpg",
-    "/background/IMG_1180.jpg",
-    "/background/IMG_1181.jpg",
-    "/background/IMG_1182.jpg",
-    "/background/IMG_1183.jpg",
+    `${BASE_URL}background/IMG_1175.jpg`,
+    `${BASE_URL}background/IMG_1176.jpg`,
+    `${BASE_URL}background/IMG_1177.jpg`,
+    `${BASE_URL}background/IMG_1178.jpg`,
+    `${BASE_URL}background/IMG_1179.jpg`,
+    `${BASE_URL}background/IMG_1180.jpg`,
+    `${BASE_URL}background/IMG_1181.jpg`,
+    `${BASE_URL}background/IMG_1182.jpg`,
+    `${BASE_URL}background/IMG_1183.jpg`,
   ];
 
   return (
@@ -20,21 +21,24 @@ function Congratulations() {
       <div className="absolute inset-0 z-0">
         <div className="grid grid-cols-3 grid-rows-3 h-full w-full">
           {backgroundImages.map((img, index) => {
-            // Replace 8th image (index 7) with YouTube video
+            // Replace 8th image (index 7) with MP4 video
             if (index === 7) {
               return (
                 <div key={index} className="relative overflow-hidden">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/3_QLj6S7cdQ?autoplay=1&loop=1&playlist=3_QLj6S7cdQ&controls=0&mute=0&modestbranding=1&rel=0&showinfo=0"
-                    title="Background Video"
-                    allow="autoplay; encrypted-media"
+                  <video
+                    autoPlay
+                    loop
+                    playsInline
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{
                       pointerEvents: "none",
                     }}
-                  />
+                  >
+                    <source
+                      src={`${BASE_URL}music/happy-birthday-bongo-cats.mp4`}
+                      type="video/mp4"
+                    />
+                  </video>
                 </div>
               );
             }

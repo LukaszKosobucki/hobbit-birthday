@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 
-// MP3 file paths in public/music folder
-const FIRST_SONG =
-  "/music/wham-last-christmas-official-video-128-ytshorts.savetube.me.mp3"; // First song (Last Christmas)
-const SECOND_SONG =
-  "/music/one-direction-one-way-or-another-teenage-kicks-lyrics-128-ytshorts.savetube.me.mp3"; // Second song
+// MP3 file paths in public/music folder - use base URL for GitHub Pages
+const BASE_URL = import.meta.env.BASE_URL;
+const FIRST_SONG = `${BASE_URL}music/wham-last-christmas-official-video-128-ytshorts.savetube.me.mp3`; // First song (Last Christmas)
+const SECOND_SONG = `${BASE_URL}music/one-direction-one-way-or-another-teenage-kicks-lyrics-128-ytshorts.savetube.me.mp3`; // Second song
 
 interface ValidationRule {
   id: number;

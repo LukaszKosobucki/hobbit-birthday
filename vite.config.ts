@@ -3,11 +3,14 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 // Get repository name for GitHub Pages base path
+// Format: owner/repo-name -> /repo-name/
 const getBasePath = () => {
-  if (process.env.GITHUB_REPOSITORY) {
-    const repoName = process.env.GITHUB_REPOSITORY.split("/")[1];
+  const repo = process.env.GITHUB_REPOSITORY;
+  if (repo) {
+    const repoName = repo.split("/")[1];
     return `/${repoName}/`;
   }
+  // Default to "/" for local development
   return "/";
 };
 
