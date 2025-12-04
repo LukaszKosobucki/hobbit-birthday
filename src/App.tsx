@@ -192,7 +192,7 @@ function App() {
         "Twoje hasło musi mieć co najmniej 45 znaków długości a maksymalnie 55",
       hint: "Możesz dodać znaki lub symbole na końcu.",
       validator: (pwd) => pwd.length >= 45 && pwd.length <= 55,
-      expected: "długość >= 40",
+      expected: "długość >= 45 i <= 55",
       unlocked: false,
     },
     {
@@ -245,7 +245,7 @@ function App() {
         if (pwd.length < 8) return false;
         const first4 = pwd.slice(0, 4);
         const reversed = first4.split("").reverse().join("").toLowerCase();
-        return pwd.endsWith(reversed);
+        return pwd.toLowerCase().endsWith(reversed);
       },
       expected: "Ostatnie 4 znaki = pierwsze 4 odwrócone",
       unlocked: false,
@@ -356,19 +356,13 @@ function App() {
         }}
       >
         <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-          Password Requirements
+          Wpisz hasełko
         </h1>
         <p className="text-gray-600 text-center mb-6">
-          Follow the rules... if you can! 😄
+          To PROSTE! Po prostu podążaj za zasadami... jeśli umiesz! 😄
         </p>
 
-        <div className="mb-6">
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-            Password
-          </label>
+        <div className="mb-6 mt-6">
           <input
             id="password"
             type="text"
@@ -376,6 +370,10 @@ function App() {
             onChange={(e) => handlePasswordChange(e.target.value)}
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-lg"
             placeholder="Enter your password..."
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
           />
         </div>
 
@@ -429,7 +427,7 @@ function App() {
               to="/congratulations"
               className="block p-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg text-white text-center font-bold text-lg animate-pulse hover:from-green-500 hover:to-blue-600 transition-all transform hover:scale-105 cursor-pointer"
             >
-              🎉 Congratulations! Your password is... acceptable? 🎉
+              🎉 ALOHOMORA! 🎉
             </Link>
           </div>
         )}
