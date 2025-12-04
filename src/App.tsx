@@ -12,6 +12,8 @@ interface ValidationRule {
   message: string;
   validator: (password: string) => boolean;
   unlocked: boolean;
+  hint?: string;
+  expected?: string;
 }
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
   const [buttonClicked, setButtonClicked] = useState(false);
   const firstSongRef = useRef<HTMLAudioElement>(null);
   const secondSongRef = useRef<HTMLAudioElement>(null);
+  const rulesContainerRef = useRef<HTMLDivElement>(null);
+  const lastRuleRef = useRef<HTMLDivElement>(null);
 
   // Auto-play first song on mount
   useEffect(() => {
@@ -101,24 +105,149 @@ function App() {
   const [rules, setRules] = useState<ValidationRule[]>([
     {
       id: 1,
-      message: "Your password must have at least 5 letters",
-      validator: (pwd) => {
-        const letters = pwd.match(/[a-zA-Z]/g);
-        return letters ? letters.length >= 5 : false;
-      },
+      message:
+        "Twoje hasło musi zaczynać się od odpowiedzi na tę zagadkę (małe litery, bez spacji): 'Mówię bez ust i słyszę bez uszu. Nie mam ciała, ale ożywam z wiatrem.'",
+      hint: "Powtarza twoje słowa z powrotem do ciebie.",
+      validator: (pwd) => pwd.toLowerCase().startsWith("echo"),
+      expected: "echo",
       unlocked: true,
     },
     {
       id: 2,
-      message: "Your password must start with the name of your dog (sparky)",
-      validator: (pwd) => pwd.toLowerCase().startsWith("sparky"),
+      message:
+        "Po pierwszej odpowiedzi dodaj rok pierwszego lądowania na Księżycu.",
+      hint: "Wydarzyło się to pod koniec lat 60.",
+      validator: (pwd) => pwd.toLowerCase().startsWith("echo1969"),
+      expected: "1969",
       unlocked: false,
     },
     {
       id: 3,
       message:
-        "Your password must end with the sum of these two numbers: 14 + 14",
-      validator: (pwd) => pwd.endsWith("28"),
+        "Twoje hasło musi zawierać co najmniej jedną wielką literę I jedną cyfrę.",
+      hint: "Połącz litery i cyfry, np. 'A1'.",
+      validator: (pwd) => {
+        const hasUpper = /[A-Z]/.test(pwd);
+        const hasDigit = /\d/.test(pwd);
+        return hasUpper && hasDigit;
+      },
+      expected: "Przynajmniej 1 wielka litera i 1 cyfra w dowolnym miejscu",
+      unlocked: false,
+    },
+    {
+      id: 4,
+      message: "Tuż po '1969' dodaj wynik tego działania: (7 * 8) - 10.",
+      hint: "Najpierw pomnóż, potem odejmij.",
+      validator: (pwd) => pwd.toLowerCase().startsWith("echo196946"),
+      expected: "46",
+      unlocked: false,
+    },
+    {
+      id: 5,
+      message: "Gdzieś w haśle musi być symbol chemiczny wody.",
+      hint: "Dwie litery, jedna z nich powtórzona.",
+      validator: (pwd) => /H2O/i.test(pwd),
+      expected: "H2O",
+      unlocked: false,
+    },
+    {
+      id: 6,
+      message:
+        "Twoje hasło musi zawierać dzień tygodnia dokładnie po poniedziałku (małe litery).",
+      hint: "Tylko angielska nazwa dnia.",
+      validator: (pwd) => pwd.toLowerCase().includes("wtorek"),
+      expected: "wtorek",
+      unlocked: false,
+    },
+    {
+      id: 7,
+      message:
+        "Na samym końcu hasła dodaj sumę WSZYSTKICH cyfr, które w nim występują.",
+      hint: "Zsumuj każdą cyfrę: dla 'echo196946' to 1+9+6+9+4+6.",
+      validator: (pwd) => {
+        const digits = pwd.match(/\d/g);
+        if (!digits || digits.length < 2) return false;
+        const sum = digits.slice(0, -2).reduce((acc, d) => acc + Number(d), 0);
+        const sumStr = String(sum);
+        return pwd.endsWith(sumStr) || pwd.endsWith(sumStr + "ohce");
+      },
+      expected: "Ostatnie cyfry = suma wszystkich poprzednich cyfr w haśle",
+      unlocked: false,
+    },
+    {
+      id: 8,
+      message:
+        "haslo musi zawierac imiona (z malych liter) 3 siostrzeńców kaczora donalda",
+      hint: "bez spacji i innych znaków specjalnych ",
+      validator: (pwd) =>
+        pwd.toLowerCase().includes("hyzio") &&
+        pwd.toLowerCase().includes("dyzio") &&
+        pwd.toLowerCase().includes("zyzio"),
+      expected: "hyzio dyzio i zyzio",
+      unlocked: false,
+    },
+    {
+      id: 9,
+      message:
+        "Twoje hasło musi mieć co najmniej 45 znaków długości a maksymalnie 55",
+      hint: "Możesz dodać znaki lub symbole na końcu.",
+      validator: (pwd) => pwd.length >= 45 && pwd.length <= 55,
+      expected: "długość >= 40",
+      unlocked: false,
+    },
+    {
+      id: 10,
+      message:
+        "Twoje hasło musi zawierać co najmniej jeden z tych symboli: !, ?, # lub @.",
+      hint: "Dodaj jeden z nich w dowolnym miejscu.",
+      validator: (pwd) => /[!?#@]/.test(pwd),
+      expected: "Przynajmniej jeden z: ! ? # @",
+      unlocked: false,
+    },
+    {
+      id: 11,
+      message:
+        "Hasło musi zawierać inicjały miesięcy twoich urodzin w formacie: pierwsza litera miesiąca po polsku + numer dnia. Przykład: '3 sierpień = S3'.",
+      hint: "Jeśli urodziny 3 lipca: 'J3'. Wstaw swoje dane.",
+      validator: (pwd) => {
+        // ZMIEŃ NA SWOJE DANE, np. urodzony 15 marca -> M15
+        const pattern = "G6";
+        return pwd.includes(pattern);
+      },
+      expected: "Wzór 'MDD' (pierwsza litera miesiąca + dzień)",
+      unlocked: false,
+    },
+    {
+      id: 12,
+      message:
+        "Hasło musi zawierać odpowiedź (małe litery, bez spacji): 'Jaka jest stolica Maroko?'",
+      hint: "Użyj angielskiej nazwy.",
+      validator: (pwd) => pwd.toLowerCase().includes("rabat"),
+      expected: "rabat",
+      unlocked: false,
+    },
+    {
+      id: 13,
+      message: "haslo musi zawierac rok chrztu polski",
+      hint: "rok chrztu polski to 966",
+      validator: (pwd) => {
+        return pwd.toLowerCase().includes("966");
+      },
+      expected: "966",
+      unlocked: false,
+    },
+    {
+      id: 14,
+      message:
+        "Hasło musi kończyć się odwróconymi pierwszymi czterema literami.",
+      hint: "Jeśli zaczyna się 'echo', musi kończyć 'ohce'.",
+      validator: (pwd) => {
+        if (pwd.length < 8) return false;
+        const first4 = pwd.slice(0, 4);
+        const reversed = first4.split("").reverse().join("").toLowerCase();
+        return pwd.endsWith(reversed);
+      },
+      expected: "Ostatnie 4 znaki = pierwsze 4 odwrócone",
       unlocked: false,
     },
   ]);
@@ -158,6 +287,19 @@ function App() {
 
   // Only show rules that should be visible (unlocked rules)
   const visibleRules = rules.filter((rule) => rule.unlocked);
+
+  // Auto-scroll to newly appeared password message
+  useEffect(() => {
+    if (lastRuleRef.current) {
+      // Small delay to ensure DOM is updated
+      setTimeout(() => {
+        lastRuleRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }, 100);
+    }
+  }, [visibleRules.length]); // Trigger when number of visible rules changes
 
   return (
     <div className="min-h-screen bg-green-400 flex items-center justify-center p-4 relative">
@@ -238,16 +380,19 @@ function App() {
         </div>
 
         <div
+          ref={rulesContainerRef}
           className="space-y-3 overflow-y-auto pr-2"
           style={{
             maxHeight: "300px", // Approximately 3 rules (each ~100px with spacing)
           }}
         >
-          {visibleRules.map((rule) => {
+          {visibleRules.map((rule, index) => {
             const status = getRuleStatus(rule);
+            const isLastRule = index === visibleRules.length - 1;
             return (
               <div
                 key={rule.id}
+                ref={isLastRule ? lastRuleRef : null}
                 className={`p-4 rounded-lg border-2 transition-all duration-500 ease-out ${
                   status === "passed"
                     ? "bg-green-50 border-green-300"
