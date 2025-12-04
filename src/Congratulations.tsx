@@ -91,62 +91,78 @@ function Congratulations() {
 
             {/* Scrollable text section only - takes available space */}
             <div className="overflow-y-auto pr-2 flex-1 min-h-0">
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                {/* First copy */}
-                <p className="text-2xl font-semibold text-gray-800">
-                  You did it! You cracked the code!
+              <div className="space-y-6 text-lg text-gray-700 leading-relaxed gap-4 flex flex-col text-start mt-4">
+                <p>
+                  Hej mój kochany
+                  <b> Hobbicie</b>! 🎉💚❄️
                 </p>
                 <p>
-                  Against all odds, you managed to navigate through our
-                  hilariously absurd password requirements. Your password must
-                  start with your dog's name (Sparky), have at least 5 letters,
-                  and end with the sum of 14 + 14 (which is 28, in case you were
-                  wondering).
+                  Gratuluję Ci rozwiązania zagadki! 💙 Możesz też podziękować
+                  Łukaszowi, to on stworzył tę stronkę i ukrył w niej całą
+                  magię. A ja dziękuję za inspirację listem, który od Ciebie
+                  dostałam, bo bez niego pewnie wyszedłby mi jakiś nudny tekst
+                  bez nutki szaleństwa i kreatywnego myślenia. Ale do rzeczy…
+                  czyli Twoich urodzin!
                 </p>
-                <p>
-                  You've proven yourself worthy of this momentous occasion. The
-                  horses in the background are here to celebrate with you! 🐴
-                </p>
-                <p className="text-xl font-semibold text-purple-600">
-                  You are truly a password master!
-                </p>
+                <div>
+                  <p>Masz dziś 28 urodziny!!! Aaaa! 😍✨</p>
+                  <p>
+                    Niech Ci ten dzień będzie jak najlepsza jazda konna, lekki,
+                    radosny, pełen wolności i tego pięknego uczucia, które
+                    czujesz, gdy pędzisz dokładnie tam, gdzie chcesz. 🐎
+                  </p>
+                  <p>
+                    Zamiast słońca życzę Ci dzisiaj magicznego, miękkiego
+                    śniegu, skrzypiącego pod butami i robiącego świat
+                    piękniejszym, bo wiem, jak bardzo kochasz zimowy klimat.
+                    Jeśli nie w Polsce, niech Twoje podróże zaprowadzą Cię do
+                    Skandynawii, Islandii lub Kanady, gdzie śnieg i przygoda
+                    czekają na każdym kroku. ❄️✨
+                  </p>
 
-                {/* Second copy */}
-                <p className="text-2xl font-semibold text-gray-800">
-                  You did it! You cracked the code!
+                  <p>
+                    A apropos podróży, życzę Ci ich wielu. Zarówno tych
+                    bliskich, jak i dalekich, tych spontanicznych tuż za róg,
+                    jak i wielkich wypraw, które zostają w sercu na zawsze. 🌍💼
+                  </p>
+                  <p>
+                    I oczywiście mnóstwo pięknych chwil, takich które się
+                    pamięta, bo były pełne śmiechu, wygłupów i dobrego vibe'u.
+                    Mam nadzieję, że dużą część z nich spędzisz jeszcze ze mną.
+                    💚
+                  </p>
+                  <p>
+                    Chcę Ci też życzyć, aby Twoja odwaga nigdy nie zgasła. Masz
+                    w sobie tę wyjątkową iskrę, która pcha Cię do próbowania
+                    nowych rzeczy, odkrywania świata i robienia wszystkiego po
+                    swojemu. Niech ta odwaga zawsze prowadzi Cię tam, gdzie
+                    poczujesz się najszczęśliwsza. W końcu życie jest jedno,
+                    więc dawaj sobie to, na co zasługujesz, nigdy mniej! 💫
+                  </p>
+                  <p>
+                    I koniecznie czekam na Twoją szczerą recenzję tölta, bo
+                    wiem, że jak Ty coś opiszesz, to ja już to widzę oczami
+                    wyobraźni. Obyś spróbowała jak najszybciej 🐎✨
+                  </p>
+                </div>
+                <div>
+                  <p>A teraz mała urodzinowa refleksja 💚</p>
+                  <p>
+                    <i>
+                      Jakie małe radości w życiu sprawiają, że czujesz się
+                      naprawdę szczęśliwa?
+                    </i>
+                    Odpowiedź sobie i świadomie zacznij wcielać je częściej w
+                    życie.
+                  </p>
+                </div>
+                <p>
+                  Ściskam Cię najmocniej i posyłam kilogramy urodzinowej
+                  energii! 💚❄️
                 </p>
                 <p>
-                  Against all odds, you managed to navigate through our
-                  hilariously absurd password requirements. Your password must
-                  start with your dog's name (Sparky), have at least 5 letters,
-                  and end with the sum of 14 + 14 (which is 28, in case you were
-                  wondering).
-                </p>
-                <p>
-                  You've proven yourself worthy of this momentous occasion. The
-                  horses in the background are here to celebrate with you! 🐴
-                </p>
-                <p className="text-xl font-semibold text-purple-600">
-                  You are truly a password master!
-                </p>
-
-                {/* Third copy */}
-                <p className="text-2xl font-semibold text-gray-800">
-                  You did it! You cracked the code!
-                </p>
-                <p>
-                  Against all odds, you managed to navigate through our
-                  hilariously absurd password requirements. Your password must
-                  start with your dog's name (Sparky), have at least 5 letters,
-                  and end with the sum of 14 + 14 (which is 28, in case you were
-                  wondering).
-                </p>
-                <p>
-                  You've proven yourself worthy of this momentous occasion. The
-                  horses in the background are here to celebrate with you! 🐴
-                </p>
-                <p className="text-xl font-semibold text-purple-600">
-                  You are truly a password master!
+                  To jak, będą dzisiaj paczki, lody czy jakieś pyszne pancakes?
+                  🍩🍨🥞
                 </p>
               </div>
             </div>
