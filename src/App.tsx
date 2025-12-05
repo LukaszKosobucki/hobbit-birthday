@@ -153,10 +153,10 @@ function App() {
     {
       id: 6,
       message:
-        "Twoje hasło musi zawierać dzień tygodnia dokładnie po poniedziałku (małe litery).",
-      hint: "Tylko angielska nazwa dnia.",
-      validator: (pwd) => pwd.toLowerCase().includes("wtorek"),
-      expected: "wtorek",
+        "Twoje hasło musi zawierać imię tego jednego greckiego boga. ;) ",
+      hint: "pies oli ares",
+      validator: (pwd) => pwd.toLowerCase().includes("ares"),
+      expected: "ares",
       unlocked: false,
     },
     {
@@ -189,16 +189,16 @@ function App() {
     {
       id: 9,
       message:
-        "Twoje hasło musi mieć co najmniej 45 znaków długości a maksymalnie 55",
+        "Twoje hasło musi mieć co najmniej 45 znaków długości a maksymalnie 59",
       hint: "Możesz dodać znaki lub symbole na końcu.",
-      validator: (pwd) => pwd.length >= 45 && pwd.length <= 55,
-      expected: "długość >= 45 i <= 55",
+      validator: (pwd) => pwd.length >= 45 && pwd.length <= 59,
+      expected: "długość >= 45 i <= 59",
       unlocked: false,
     },
     {
       id: 10,
       message:
-        "Twoje hasło musi zawierać co najmniej jeden z tych symboli: !, ?, # lub @.",
+        "Twoje hasło musi zawierać co najmniej jeden z tych symboli: !, ?, # lub @, aby bylo bezpieczne...",
       hint: "Dodaj jeden z nich w dowolnym miejscu.",
       validator: (pwd) => /[!?#@]/.test(pwd),
       expected: "Przynajmniej jeden z: ! ? # @",
@@ -220,7 +220,7 @@ function App() {
     {
       id: 12,
       message:
-        "Hasło musi zawierać odpowiedź (małe litery, bez spacji): 'Jaka jest stolica Maroko?'",
+        "Hasło musi zawierać odpowiedź na pytanie: 'Jaka jest stolica Maroko?'",
       hint: "Użyj angielskiej nazwy.",
       validator: (pwd) => pwd.toLowerCase().includes("rabat"),
       expected: "rabat",
@@ -239,13 +239,23 @@ function App() {
     {
       id: 14,
       message:
-        "Hasło musi kończyć się odwróconymi pierwszymi czterema literami.",
+        "Zeby zakonczyc ten czelendz musisz wpisac PO sumie wszystkich liczb odpowiedz na pierwsze pytanie, tylko ze OD TYLU",
       hint: "Jeśli zaczyna się 'echo', musi kończyć 'ohce'.",
       validator: (pwd) => {
         if (pwd.length < 8) return false;
         const first4 = pwd.slice(0, 4);
         const reversed = first4.split("").reverse().join("").toLowerCase();
         return pwd.toLowerCase().endsWith(reversed);
+      },
+      expected: "Ostatnie 4 znaki = pierwsze 4 odwrócone",
+      unlocked: false,
+    },
+    {
+      id: 15,
+      message: "to ile lat konczysz?",
+      hint: "Jeśli zaczyna się 'echo', musi kończyć 'ohce'.",
+      validator: (pwd) => {
+        return pwd.toLowerCase().includes("28");
       },
       expected: "Ostatnie 4 znaki = pierwsze 4 odwrócone",
       unlocked: false,
